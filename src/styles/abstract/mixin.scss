@@ -1,0 +1,41 @@
+/* MEDIA QUERY MOBILE FIRST
+
+0 - 600px:        Phone
+600 - 900px:      Tablet portrait
+900 - 1200px:     Tablet landscape
+1200 - 1800px:    Laptop is normal styles apply
+1800px+:          Big desktop
+
+$breakpoint arguement:
+- phone: 37.5em ~ 600px
+- tab-port: 56.25em ~ 900px 
+- tab-land: 75em ~ 1200px
+- big-desktop: 112.5em ~ 1800px
+
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tab-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}

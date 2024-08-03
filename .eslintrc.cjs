@@ -1,0 +1,43 @@
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+  ],
+  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  parser: "@typescript-eslint/parser",
+  plugins: ["react-refresh", "react", "react-hooks"],
+  rules: {
+    "react-refresh/only-export-components": [
+      1,
+      {
+        allowConstantExport: true,
+      },
+    ],
+    "react-hooks/rules-of-hooks": 2,
+    "react-hooks/exhaustive-deps": 1,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "react/react-in-jsx-scope": 0,
+
+    "no-lonely-if": 1,
+    "no-trailing-spaces": 1,
+    "no-multi-spaces": 1,
+    "no-multiple-empty-lines": 1,
+    "space-before-blocks": [1, "always"],
+    "object-curly-spacing": [1, "always"],
+    "array-bracket-spacing": 1,
+    semi: [1, "never"],
+    quotes: [1, "single"],
+    "linebreak-style": 0,
+    "no-unexpected-multiline": 2,
+    "keyword-spacing": 1,
+    "comma-dangle": 1,
+    "comma-spacing": 1,
+    "arrow-spacing": 1,
+  },
+};

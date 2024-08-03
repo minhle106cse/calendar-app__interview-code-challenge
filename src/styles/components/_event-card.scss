@@ -1,0 +1,45 @@
+.event-card {
+  padding: 1rem;
+  border-radius: $rounded;
+  cursor: pointer;
+  position: relative;
+
+  font-family: $font-primary;
+  color: rgba($color-black, 0.75);
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__time {
+    font-size: 1.4rem;
+  }
+
+  &--event {
+    background-color: rgba($color-primary, 0.2);
+    border: 1px solid $color-primary-dark;
+  }
+  &--appointment {
+    background-color: rgba($color-secondary, 0.5);
+    border: 1px solid $color-secondary-dark;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 0.5s;
+    background-color: $color-primary;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}

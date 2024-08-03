@@ -1,0 +1,38 @@
+.header {
+  height: 8rem;
+  border-bottom: 1px solid $color-grey;
+  padding: 0 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+
+  @include respond(phone) {
+    justify-content: space-between;
+
+    & > div:first-child {
+      display: none;
+    }
+  }
+
+  &__logo {
+    width: 20rem;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include respond(phone) {
+      position: static;
+      transform: translateX(0%);
+      width: 15rem;
+    }
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    color: $color-primary;
+    font-weight: 600;
+  }
+}

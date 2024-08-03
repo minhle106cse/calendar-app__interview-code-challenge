@@ -1,0 +1,9 @@
+.bg-grey {
+  width: 100%;
+  height: calc(100vh - 8rem);
+  background-color: $color-grey-light;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
