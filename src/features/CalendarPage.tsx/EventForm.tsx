@@ -37,10 +37,12 @@ const EventForm = () => {
   const [postEvent, { isLoading }] = usePostEventMutation()
   const [editEvnet, { isLoading: isLoadingEdit }] = useEditEventMutation()
 
-  const options = clients.map((item) => ({
-    value: item.id,
-    label: item.name
-  }))
+  const options = clients
+    .filter((item) => item.id !== 'HKD')
+    .map((item) => ({
+      value: item.id,
+      label: item.name
+    }))
 
   const handleFormSubmit = (values: FormValues) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -104,12 +106,12 @@ const EventForm = () => {
         type: event.currency === 'HKD' ? 'EVENT' : 'APPOINTMENT',
         description: event.description.html,
         rangeTime: [dayjs(event.start.local), dayjs(event.end.local)],
-        client: event.currency
+        client: event.currency !== 'HKD' ? event.currency : undefined
       })
 
       setIsAppointment(event.currency !== 'HKD')
     }
-  }, [eventState.targetedEvent])
+  }, [eventState.targetedEvent, form])
 
   return (
     <Modal
@@ -127,7 +129,7 @@ const EventForm = () => {
       onOk={() => {
         form.submit()
       }}
-      confirmLoading={isLoading}
+      confirmLoading={isLoading || isLoadingEdit}
     >
       <Form
         name='event-form'

@@ -92,7 +92,7 @@ const EventPopover = ({ event, children }: EventPopoverProps) => {
         </div>
       )}
 
-      {client && (
+      {client && client.id !== 'HKD' && (
         <div className='popover-event__avatar'>
           <img src={client?.avatarLink} />
           <a href={client?.profileLink}>{client?.name}</a>

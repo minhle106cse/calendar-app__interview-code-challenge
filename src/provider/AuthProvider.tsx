@@ -1,6 +1,6 @@
 import { ReactElement, createContext, useEffect, useState } from 'react'
 import LOCAL_STORAGE from '../constants/localStorage'
-import { useGetMeQuery } from '../api/userApi'
+import { useGetMeQuery, useGetOrganizationQuery } from '../api/userApi'
 import Me from '../types/me'
 
 export interface AuthValue {
@@ -22,16 +22,27 @@ const AuthProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
     skip: !localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)
   })
 
-  useEffect(() => {
-    if (data) {
-      setMe(data)
-      setIsLoggedIn(true)
-    }
-  }, [data, isLoggedIn])
+  const { data: organizationData, isFetching: isFetchingOrganization } =
+    useGetOrganizationQuery(undefined, {
+      skip: !localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)
+    })
 
   useEffect(() => {
-    setIsFetching(isFetchingMe)
-  }, [isFetchingMe])
+    if (data && organizationData) {
+      setMe(data)
+      setIsLoggedIn(true)
+
+      const id = organizationData.organizations.find(
+        (item) => item.name === data.name
+      )?.id
+
+      localStorage.setItem(LOCAL_STORAGE.ORGANIZATION, id ?? '')
+    }
+  }, [data, isLoggedIn, organizationData])
+
+  useEffect(() => {
+    setIsFetching(isFetchingMe || isFetchingOrganization)
+  }, [isFetchingMe, isFetchingOrganization])
 
   return (
     <AuthContext.Provider

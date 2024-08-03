@@ -36,7 +36,7 @@ const BigCalendar = () => {
 
   useEffect(() => {
     if (data?.events) dispatch(saveEvents(data?.events))
-  }, [data])
+  }, [data, dispatch])
 
   return (
     <div className='big-calendar'>

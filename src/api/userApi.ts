@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import axiosBaseQuery from './customAxios/axiosBaseQuery'
 import meEndpoints from '../endpoints/me'
 import Me from '../types/me'
+import { OrganizationData } from '../types/organization'
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -12,8 +13,14 @@ export const userApi = createApi({
         url: meEndpoints.me,
         method: 'GET'
       })
+    }),
+    getOrganization: build.query<OrganizationData, void>({
+      query: () => ({
+        url: meEndpoints.organization,
+        method: 'GET'
+      })
     })
   })
 })
 
-export const { useGetMeQuery } = userApi
+export const { useGetMeQuery, useGetOrganizationQuery } = userApi

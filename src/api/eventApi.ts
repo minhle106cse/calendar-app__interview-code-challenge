@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import axiosBaseQuery from './customAxios/axiosBaseQuery'
 import eventEndpoints from '../endpoints/event'
 import { EventFormData, Event } from '../types/event'
+import LOCAL_STORAGE from '../constants/localStorage'
 
 export const eventApi = createApi({
   reducerPath: 'eventApi',
@@ -10,7 +11,9 @@ export const eventApi = createApi({
   endpoints: (build) => ({
     getEvents: build.query<{ events: Event[] }, void>({
       query: () => ({
-        url: eventEndpoints.event(import.meta.env.VITE_ORGANIZATION_ID),
+        url: eventEndpoints.event(
+          localStorage.getItem(LOCAL_STORAGE.ORGANIZATION) ?? ''
+        ),
         method: 'GET',
         params: {
           page_size: 100
@@ -29,7 +32,9 @@ export const eventApi = createApi({
     }),
     postEvent: build.mutation<{ id: string }, { event: EventFormData }>({
       query: (data) => ({
-        url: eventEndpoints.event(import.meta.env.VITE_ORGANIZATION_ID),
+        url: eventEndpoints.event(
+          localStorage.getItem(LOCAL_STORAGE.ORGANIZATION) ?? ''
+        ),
         method: 'POST',
         data: data
       }),

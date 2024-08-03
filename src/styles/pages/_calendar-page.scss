@@ -41,8 +41,11 @@
         }
       }
 
-      & > article:last-child .upcoming-events {
-        border-radius: 0;
+      & > article:last-child {
+        flex: 1;
+        .upcoming-events {
+          border-radius: 0;
+        }
       }
     }
     main {

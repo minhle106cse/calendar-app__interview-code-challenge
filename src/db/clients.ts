@@ -35,6 +35,12 @@ const clients: Client[] = [
     avatarLink:
       'https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-2.jpg',
     profileLink: 'https://www.facebook.com/minhle106.cse/'
+  },
+  {
+    id: 'HKD',
+    name: '',
+    avatarLink: '',
+    profileLink: ''
   }
 ]
 

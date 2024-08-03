@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import useAuth from '../hooks/useAuth'
+import { SignOut } from '@phosphor-icons/react'
 
 const Header = () => {
   const auth = useAuth()
+
+  const navigate = useNavigate()
 
   return (
     <header className='header'>
@@ -13,7 +17,19 @@ const Header = () => {
         {auth?.isLoggedIn &&
           (auth?.isFetching
             ? 'Wait for seconds... :)'
-            : `Hi, I'm  ${auth?.me?.name} 🔥🔥🔥`)}
+            : `Hi, ${auth?.me?.name} 🔥🔥🔥`)}
+
+        {auth?.isLoggedIn && (
+          <span
+            className='header__logout'
+            onClick={() => {
+              localStorage.clear()
+              navigate('/login')
+            }}
+          >
+            <SignOut /> <span style={{ marginLeft: '.5rem' }}>Log out</span>
+          </span>
+        )}
       </span>
     </header>
   )

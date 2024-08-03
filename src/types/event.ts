@@ -35,5 +35,5 @@ export interface EventFormData {
     timezone: string
     utc: string
   }
-  currency?: string
+  currency: string
 }

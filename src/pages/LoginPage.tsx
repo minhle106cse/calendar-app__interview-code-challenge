@@ -1,3 +1,5 @@
+import eventbrite_logo from '../assets/eventbrite_logo.webp'
+
 const LoginPage = () => {
   const handleBtnClick = () => {
     const clientId = import.meta.env.VITE_API_KEY
@@ -15,7 +17,8 @@ const LoginPage = () => {
           type='button'
           className='login-page__action'
         >
-          Access My Calendar
+          <img src={eventbrite_logo} alt='EventBrite logo' /> Log in with
+          EventBrite
         </button>
       </main>
     </div>

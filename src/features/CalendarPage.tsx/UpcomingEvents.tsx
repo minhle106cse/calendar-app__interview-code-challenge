@@ -13,11 +13,9 @@ const UpcomingEvents = () => {
     dayjs(item.start.local).isSame(dayjs(), 'day')
   )
 
-  /* const targetEvent = eventState.events.filter((item) =>
+  const targetEvent = eventState.events.filter((item) =>
     dayjs(item.start.local).isSame(dayjs(systemState.targetedDate), 'day')
-  ) */
-
-  const targetEvent = eventState.events
+  )
 
   return (
     <div className='upcoming-events'>
@@ -40,22 +38,26 @@ const UpcomingEvents = () => {
           </div>
         </div>
 
-        <div>
-          <h5 className='upcoming-events__subtitle'>
-            {dayjs(systemState.targetedDate).format('DD')}
-            {getDaySuffix(dayjs(systemState.targetedDate).date())}{' '}
-            {dayjs(systemState.targetedDate).format('MMMM')}
-          </h5>
+        {systemState.targetedDate && (
+          <div>
+            <h5 className='upcoming-events__subtitle'>
+              {dayjs(systemState.targetedDate).format('DD')}
+              {getDaySuffix(dayjs(systemState.targetedDate).date())}{' '}
+              {dayjs(systemState.targetedDate).format('MMMM')}
+            </h5>
 
-          <div className='upcoming-events__box'>
-            {targetEvent.map((item) => (
-              <CardEvent event={item} key={item.id} />
-            ))}
-            {targetEvent.length === 0 && (
-              <div className='upcoming-events__empty'>No events available.</div>
-            )}
+            <div className='upcoming-events__box'>
+              {targetEvent.map((item) => (
+                <CardEvent event={item} key={item.id} />
+              ))}
+              {targetEvent.length === 0 && (
+                <div className='upcoming-events__empty'>
+                  No events available.
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

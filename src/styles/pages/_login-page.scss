@@ -5,12 +5,21 @@
 
   &__action {
     padding: 2rem;
-    background-color: $color-primary;
-    color: $color-white;
+    background-color: $color-secondary;
+    color: #eb572c;
     border: 0;
     font-size: 2rem;
     font-weight: 600;
     cursor: pointer;
     border-radius: $rounded;
+    border: 1px solid $color-secondary-dark;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      height: 3rem;
+    }
   }
 }

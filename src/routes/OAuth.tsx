@@ -1,9 +1,8 @@
-import { notification, Spin } from 'antd'
+import { Spin } from 'antd'
 import axios, { AxiosError } from 'axios'
 import { useEffect } from 'react'
 import LOCAL_STORAGE from '../constants/localStorage'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../hooks/useAppDispatch'
 import useAuth from '../hooks/useAuth'
 
 const OAuth = () => {
@@ -11,8 +10,6 @@ const OAuth = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const abortController = new AbortController()
-
     const urlParams = new URLSearchParams(window.location.search)
     const authorizationCode = urlParams.get('code')
 
@@ -34,8 +31,7 @@ const OAuth = () => {
           {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            signal: abortController.signal
+            }
           }
         )
 
@@ -48,18 +44,21 @@ const OAuth = () => {
         navigate('/')
       } catch (error) {
         const er = error as AxiosError
-        console.error(er.message)
+        console.log(er.message)
+        /*   if (er.message === 'Request failed with status code 400') {
+          notification.error({
+            message: 'Error',
+            description: 'Code is invalid or expired'
+          })
+          navigate('/login')
+        } */
       }
     }
 
     if (authorizationCode) {
       fetchAccessToken(authorizationCode)
     }
-
-    return () => {
-      abortController.abort()
-    }
-  }, [])
+  }, [auth, navigate])
 
   return (
     <Spin spinning={true}>

@@ -12,9 +12,9 @@ const CardEvent = ({ event }: CardEventProps) => {
   const timeStart = localStart.format('hh:mmA')
   const utcOffsetStart = localStart.format('UTCZ')
 
-  const utcEnd = dayjs.utc(event.end.utc)
+  /*   const utcEnd = dayjs.utc(event.end.utc)
   const localEnd = utcEnd.tz(event.end.timezone)
-  const timeEnd = localEnd.format('hh:mmA')
+  const timeEnd = localEnd.format('hh:mmA') */
 
   const client = clients.find((client) => client.id === event.currency)
 
@@ -28,13 +28,15 @@ const CardEvent = ({ event }: CardEventProps) => {
     >
       <div className='event-card__title'>{event.name.html}</div>
       <div className='event-card__time'>
-        {timeStart} - {timeEnd} {utcOffsetStart}
+        {timeStart} {utcOffsetStart}
       </div>
 
-      {client && (
+      {client && client.id !== 'HKD' && (
         <div className='popover-event__avatar'>
           <img src={client?.avatarLink} />
-          <a href={client?.profileLink}>{client?.name}</a>
+          <a href={client?.profileLink} onClick={(e) => e.stopPropagation()}>
+            {client?.name}
+          </a>
         </div>
       )}
     </div>
